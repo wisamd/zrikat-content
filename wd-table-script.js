@@ -1452,7 +1452,7 @@ projectData.items.forEach(item => {
                             this.hasUnsavedChanges = true;
                             this.saveProjectDataToFile();
                             // Update the rounded up cell to match
-                            roundedUpCell.textContent = value.toFixed(2);
+                            roundedUpCell.textContent = value;
                         }
                     });
                     totalDaysCell.appendChild(totalDaysInput);
@@ -1646,12 +1646,12 @@ projectData.items.forEach(item => {
                             quantity: this.organizationRowData?.quantity || 0,
                             inputOutput: this.organizationRowData?.inputOutput || 8.00,
                             totalHours: (this.organizationRowData?.quantity || 0) * (this.organizationRowData?.inputOutput || 8.00),
-                            numWorkers: this.organizationRowData?.numWorkers || 1.00,
+                            numWorkers: this.organizationRowData?.numWorkers || 1,
                             hoursPerDay: this.organizationRowData?.hoursPerDay || 8.00,
                             totalDays: ((this.organizationRowData?.quantity || 0) * (this.organizationRowData?.inputOutput || 8.00)) / 
-                                     ((this.organizationRowData?.numWorkers || 1.00) * (this.organizationRowData?.hoursPerDay || 8.00)),
+                                     ((this.organizationRowData?.numWorkers || 1) * (this.organizationRowData?.hoursPerDay || 8.00)),
                             roundedUpDays: Math.ceil((((this.organizationRowData?.quantity || 0) * (this.organizationRowData?.inputOutput || 8.00)) / 
-                                                    ((this.organizationRowData?.numWorkers || 1.00) * (this.organizationRowData?.hoursPerDay || 8.00))) * 100) / 100
+                                                    ((this.organizationRowData?.numWorkers || 1) * (this.organizationRowData?.hoursPerDay || 8.00))))
                         },
                         // Add regular items
                         ...this.projectData.items.map(item => ({
@@ -1701,7 +1701,7 @@ projectData.items.forEach(item => {
                         quantity: 0,
                         inputOutput: 8.00,
                         totalHours: 0,
-                        numWorkers: 1.00,
+                        numWorkers: 1,
                         hoursPerDay: 8.00,
                         totalDays: 0,
                         roundedUpDays: 0
@@ -1713,7 +1713,7 @@ projectData.items.forEach(item => {
                         quantity: 0,
                         inputOutput: 8.00,
                         totalHours: 0,
-                        numWorkers: 1.00,
+                        numWorkers: 1,
                         hoursPerDay: 8.00,
                         totalDays: 0,
                         roundedUpDays: 0
@@ -2098,10 +2098,10 @@ projectData.items.forEach(item => {
                             <td>${item.unitType !== 'comp' ? calcData.inputOutput.toFixed(2) : ''}</td>
                             <td>שעות</td>
                             <td>${item.unitType !== 'comp' ? calcData.totalHours.toFixed(2) : ''}</td>
-                            <td>${item.unitType !== 'comp' ? calcData.numWorkers.toFixed(2) : ''}</td>
+                            <td>${item.unitType !== 'comp' ? calcData.numWorkers : ''}</td>
                             <td>${item.unitType !== 'comp' ? calcData.hoursPerDay.toFixed(2) : ''}</td>
                             <td>${calcData.totalDays.toFixed(2)}</td>
-                            <td>${calcData.roundedUpDays.toFixed(2)}</td>
+                            <td>${calcData.roundedUpDays}</td>
                         </tr>
                     `;
                 });

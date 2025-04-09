@@ -1474,7 +1474,7 @@ projectData.items.forEach(item => {
                     } else if (item.id === "BOQ-032") {
                         defaultDays = 2;
                     }
-                    roundedUpCell.textContent = (calcData?.totalDays || defaultDays).toFixed(2);
+                    roundedUpCell.textContent = (calcData?.totalDays || defaultDays);
                 }
                 row.appendChild(roundedUpCell);
 

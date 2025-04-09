@@ -1551,11 +1551,10 @@ projectData.items.forEach(item => {
                             }
                         });
                     }
-
                     if (hoursPerDayInput) {
-                        hoursPerDayInput.('change', (e) => {
+                        hoursPerDayInput.addEventListener('change', (e) => {
                             const value = parseFloat(e.target.value);
-                            if (!isNaN(value)) {addEventListener
+                            if (!isNaN(value)) {
                                 e.target.value = value.toFixed(2);
                                 this.updateCalculationData(item.id, { hoursPerDay: value });
                                 item.hoursPerDay = value;

@@ -1531,6 +1531,7 @@ projectData.items.forEach(item => {
                             const value = parseFloat(e.target.value);
                             if (!isNaN(value)) {
                                 e.target.value = value.toFixed(2);
+                                this.updateCalculationData(item.id, { inputOutput: value });
                                 item.inputOutput = value;
                                 this.hasUnsavedChanges = true;
                                 updateTotalHours();
@@ -1543,6 +1544,7 @@ projectData.items.forEach(item => {
                             const value = parseFloat(e.target.value);
                             if (!isNaN(value)) {
                                 e.target.value = value;
+                                this.updateCalculationData(item.id, { numWorkers: value });
                                 item.numWorkers = value;
                                 this.hasUnsavedChanges = true;
                                 updateTotalDays();
@@ -1551,10 +1553,11 @@ projectData.items.forEach(item => {
                     }
 
                     if (hoursPerDayInput) {
-                        hoursPerDayInput.addEventListener('change', (e) => {
+                        hoursPerDayInput.('change', (e) => {
                             const value = parseFloat(e.target.value);
-                            if (!isNaN(value)) {
+                            if (!isNaN(value)) {addEventListener
                                 e.target.value = value.toFixed(2);
+                                this.updateCalculationData(item.id, { hoursPerDay: value });
                                 item.hoursPerDay = value;
                                 this.hasUnsavedChanges = true;
                                 updateTotalDays();

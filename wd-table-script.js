@@ -1209,7 +1209,7 @@ projectData.items.forEach(item => {
                 const row = document.createElement('tr');
                 row.className = 'item-row';
                 row.dataset.itemId = item.id;
-                
+                const calcData = this.getCalculationData(item.id);
                 // Set background color for comp items
                 if (item.unitType === "comp") {
                     row.style.backgroundColor = 'lightpink';
@@ -1234,7 +1234,7 @@ projectData.items.forEach(item => {
                     quantityInput = document.createElement('input');
                     quantityInput.type = 'number';
                     quantityInput.step = '0.01';
-                    const calcData = this.getCalculationData(item.id);
+                    
                     quantityInput.value = (calcData?.quantity || 0).toFixed(2);
                     quantityInput.style.width = '100px';
                     quantityInput.style.textAlign = 'center';
@@ -1359,7 +1359,7 @@ projectData.items.forEach(item => {
                     inputOutputInput = document.createElement('input');
                     inputOutputInput.type = 'number';
                     inputOutputInput.step = '0.01';
-                    inputOutputInput.value = (item.inputOutput || val).toFixed(2);
+                    inputOutputInput.value = (calcData?.inputOutput || val).toFixed(2);
                     inputOutputInput.style.width = '100px';
                     inputOutputInput.style.textAlign = 'center';
                     inputOutputCell.appendChild(inputOutputInput);
@@ -1405,7 +1405,7 @@ projectData.items.forEach(item => {
                     workersInput = document.createElement('input');
                     workersInput.type = 'number';
                     workersInput.step = '1';
-                    workersInput.value = (item.numWorkers || 0);
+                    workersInput.value = (calcData?.numWorkers || 0);
                     workersInput.style.width = '100px';
                     workersInput.style.textAlign = 'center';
                     workersCell.appendChild(workersInput);
@@ -1421,7 +1421,7 @@ projectData.items.forEach(item => {
                     hoursPerDayInput = document.createElement('input');
                     hoursPerDayInput.type = 'number';
                     hoursPerDayInput.step = '0.01';
-                    hoursPerDayInput.value = (item.hoursPerDay || 8.00).toFixed(2);
+                    hoursPerDayInput.value = (calcData?.hoursPerDay || 8.00).toFixed(2);
                     hoursPerDayInput.style.width = '100px';
                     hoursPerDayInput.style.textAlign = 'center';
                     hoursPerDayCell.appendChild(hoursPerDayInput);
@@ -1437,7 +1437,6 @@ projectData.items.forEach(item => {
                     const totalDaysInput = document.createElement('input');
                     totalDaysInput.type = 'number';
                     totalDaysInput.step = '0.01';
-                    const calcData = this.getCalculationData(item.id);
                     totalDaysInput.value = (calcData?.totalDays || (item.itemNumber == 38 ? 2 : item.itemNumber == 41 ? 10 : item.itemNumber == 42 ? 7 : 3)).toFixed(2); // Default value of 3 for comp items
                     totalDaysInput.style.width = '100px';
                     totalDaysInput.style.textAlign = 'center';

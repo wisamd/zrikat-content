@@ -2072,7 +2072,7 @@ projectData.items.forEach(item => {
                 };
 
                 // Add skeleton subtitle after 4th row
-                rowCount++;
+                
                 if (rowCount === 4) {
                     tableHTML += `
                         <tr class="subtitle-row">
@@ -2193,6 +2193,7 @@ projectData.items.forEach(item => {
                         <td>${roundedUpDays}</td>
                     </tr>
                 `;
+                rowCount++;
             });
 
             // Add comments

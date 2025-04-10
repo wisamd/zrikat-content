@@ -1650,10 +1650,8 @@ projectData.items.forEach(item => {
                             totalHours: (this.organizationRowData?.quantity || 0) * (this.organizationRowData?.inputOutput || 8.00),
                             numWorkers: this.organizationRowData?.numWorkers || 1,
                             hoursPerDay: this.organizationRowData?.hoursPerDay || 8.00,
-                            totalDays: ((this.organizationRowData?.quantity || 0) * (this.organizationRowData?.inputOutput || 8.00)) / 
-                                     ((this.organizationRowData?.numWorkers || 1) * (this.organizationRowData?.hoursPerDay || 8.00)),
-                            roundedUpDays: Math.ceil((((this.organizationRowData?.quantity || 0) * (this.organizationRowData?.inputOutput || 8.00)) / 
-                                                    ((this.organizationRowData?.numWorkers || 1) * (this.organizationRowData?.hoursPerDay || 8.00))))
+                            totalDays: this.organizationRowData?.totalDays || 0,
+                            roundedUpDays: this.organizationRowData?.roundedUpDays || 0
                         },
                         // Add regular items
                         ...this.projectData.items.map(item => ({

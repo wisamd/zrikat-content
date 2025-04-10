@@ -1,4 +1,3 @@
-
 /**
  * נתוני התייחסות - מידע סטטי על סוגי עבודות, יחידות מידה וקטגוריות
  * משמש כמאגר מידע קבוע לתצוגת ערכים בטבלה
@@ -2027,95 +2026,186 @@ projectData.items.forEach(item => {
                     </thead>
                     <tbody>
             `;
-// Add excavation subtitle
+
+            // Add excavation subtitle
             tableHTML += `
                     <tr class="subtitle-row">
                         <td colspan="1"></td>
                         <td colspan="10">ערסל לחפירה וקידוח</td>
                         </tr>
                     `;
-                // Add organization row
+
+            // Add organization row with actual data
+            const orgRowData = data.calculationData.find(calc => calc.itemId === 'org-row') || {
+                totalDays: 4.00,
+                roundedUpDays: 4
+            };
             tableHTML += `
                     <tr class="organization-row">
                         <td>0</td>
                         <td>התארגנות</td>
                         <td></td>
+                        <td>קומפ'</td>
+                        <td></td>
                         <td>ימים</td>
                         <td></td>
-                        <td>שעות</td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td>0.00</td>
-                        <td>0.00</td>
+                        <td>${orgRowData.totalDays.toFixed(2)}</td>
+                        <td>${orgRowData.roundedUpDays}</td>
                 </tr>
             `;
-                
-                
+             // Sort items by itemNumber to maintain order
+            const sortedItems = [...data.projectData.items].sort((a, b) => a.itemNumber - b.itemNumber);
+            // Add items
+            let rowCount = 0;
+            sortedItems.forEach((item) => {
+                // Get calculation data for this item
+                const calcData = data.calculationData.find(calc => calc.itemId === item.id) || {
+                    quantity: item.totalQuantity || 0,
+                    inputOutput: 0,
+                    totalHours: 0,
+                    numWorkers: 0,
+                    hoursPerDay: 8.00,
+                    totalDays: 0,
+                    roundedUpDays: 0
+                };
 
-                // Add items
-                let rowCount = 0;
-                data.projectData.items.forEach((item) => {
-                    // Get calculation data for this item
-                    const calcData = data.calculationData.find(calc => calc.itemId === item.id) || {
-                        inputOutput: 0,
-                        totalHours: 0,
-                        numWorkers: 0,
-                        hoursPerDay: 8.00,
-                        totalDays: 0,
-                        roundedUpDays: 0
-                    };
-                    
-                    // Add skeleton subtitle after 4th row
-                    rowCount++;
-                    if (rowCount === 4) {
-                        tableHTML += `
-                            <tr class="subtitle-row">
-                                <td colspan="1"></td>
-                                <td colspan="10">ערסל לשלד</td>
-                            </tr>
-                        `;
-                    }
-
-                    // Add finishing subtitle after 25th row
-                    if (rowCount === 27) {
-                        tableHTML += `
-                            <tr class="subtitle-row">
-                                <td colspan="1"></td>
-                                <td colspan="10">ערסל לגמר</td>
-                            </tr>
-                        `;
-                    }
-
-                    // Add item row
+                // Add skeleton subtitle after 4th row
+                rowCount++;
+                if (rowCount === 4) {
                     tableHTML += `
-                        <tr class="${item.unitType === 'comp' ? 'comp-row' : ''}">
-                            <td>${item.itemNumber}</td>
-                            <td>${item.descriptionHebrew}</td>
-                            <td>${item.unitType !== 'comp' ? item.totalQuantity.toFixed(2) : ''}</td>
-                            <td>${item.unitType === 'm3' ? 'מ"ק' : item.unitType === 'm2' ? 'מ"ר' : item.unitType === 'm' ? 'מ"א' : item.unitType === 'comp' ? 'קומפ\'' : ''}</td>
-                            <td>${item.unitType !== 'comp' ? calcData.inputOutput.toFixed(2) : ''}</td>
-                            <td>שעות</td>
-                            <td>${item.unitType !== 'comp' ? calcData.totalHours.toFixed(2) : ''}</td>
-                            <td>${item.unitType !== 'comp' ? calcData.numWorkers : ''}</td>
-                            <td>${item.unitType !== 'comp' ? calcData.hoursPerDay.toFixed(2) : ''}</td>
-                            <td>${calcData.totalDays.toFixed(2)}</td>
-                            <td>${calcData.roundedUpDays}</td>
+                        <tr class="subtitle-row">
+                            <td colspan="1"></td>
+                            <td colspan="10">ערסל לשלד</td>
                         </tr>
                     `;
-                });
+                }
 
-                // Add comments
+                // Add finishing subtitle after 25th row
+                if (rowCount === 27) {
+                    tableHTML += `
+                        <tr class="subtitle-row">
+                            <td colspan="1"></td>
+                            <td colspan="10">ערסל לגמר</td>
+                        </tr>
+                    `;
+                }
+
+                // Get default values for comp items
+                let defaultDays = 3;
+                if (item.id === "BOQ-036") {
+                    defaultDays = 7;
+                } else if (item.id === "BOQ-035") {
+                    defaultDays = 10;
+                } else if (item.id === "BOQ-032") {
+                    defaultDays = 2;
+                }
+
+                // Get default input/output value based on item number
+                let defaultInputOutput = 0;
+                switch (item.itemNumber) {
+                    case 1: defaultInputOutput = 450.00; break;
+                    case 2: defaultInputOutput = 17.00; break;
+                    case 3: defaultInputOutput = 60.00; break;
+                    case 4: defaultInputOutput = 15.00; break;
+                    case 5: defaultInputOutput = 0.25; break;
+                    case 6: defaultInputOutput = 31.00; break;
+                    case 7: defaultInputOutput = 1.50; break;
+                    case 8: defaultInputOutput = 17.00; break;
+                    case 9: defaultInputOutput = 1.34; break;
+                    case 10: defaultInputOutput = 0.50; break;
+                    case 11: defaultInputOutput = 1.60; break;
+                    case 12: defaultInputOutput = 31.00; break;
+                    case 13: defaultInputOutput = 170.00; break;
+                    case 14: defaultInputOutput = 1.34; break;
+                    case 15: defaultInputOutput = 1.60; break;
+                    case 16: defaultInputOutput = 31.00; break;
+                    case 17: defaultInputOutput = 17.00; break;
+                    case 18: defaultInputOutput = 17.00; break;
+                    case 19: defaultInputOutput = 1.34; break;
+                    case 20: defaultInputOutput = 31.00; break;
+                    case 21: defaultInputOutput = 17.00; break;
+                    case 22: defaultInputOutput = 17.00; break;
+                    case 23: defaultInputOutput = 1.34; break;
+                    case 24: defaultInputOutput = 1.30; break;
+                    case 25: defaultInputOutput = 1.30; break;
+                    case 26: defaultInputOutput = 1.30; break;
+                    case 29: defaultInputOutput = 0.55; break;
+                    case 30: defaultInputOutput = 0.70; break;
+                    case 31: defaultInputOutput = 0.50; break;
+                    case 32: defaultInputOutput = 0.88; break;
+                    case 33: defaultInputOutput = 0.10; break;
+                    case 39: defaultInputOutput = 0.50; break;
+                    case 40: defaultInputOutput = 0.12; break;
+                }
+
+                // Get unit text based on item number
+                let unitText = '';
+                if (item.unitType === 'comp') {
+                    unitText = 'קומפ\'';
+                } else if (item.itemNumber === 1) {
+                    unitText = 'מ"ק ליום';
+                } else if (item.itemNumber === 2) {
+                    unitText = 'ש"ע למ"ק';
+                } else if (item.itemNumber === 3) {
+                    unitText = 'מ"א ליום';
+                } else if ([4, 6, 8, 12, 13, 16, 17].includes(item.itemNumber)) {
+                    unitText = 'ש"ע למ"ק';
+                } else {
+                    unitText = 'ש"ע למ"ר';
+                }
+
+                // Calculate values for non-comp items
+                let totalHours = 0;
+                let totalDays = 0;
+                let roundedUpDays = 0;
+
+                if (item.unitType !== 'comp') {
+                    const quantity = calcData.quantity || 0;
+                    const inputOutput = calcData.inputOutput || defaultInputOutput;
+                    const numWorkers = calcData.numWorkers || 0;
+                    const hoursPerDay = calcData.hoursPerDay || 8.00;
+
+                    totalHours = quantity * inputOutput;
+                    if (numWorkers > 0 && hoursPerDay > 0) {
+                        totalDays = totalHours / (numWorkers * hoursPerDay);
+                    }
+                    roundedUpDays = Math.ceil(totalDays);
+                } else {
+                    totalDays = calcData.totalDays? calcData.totalDays.toFixed(2) : defaultDays;
+                    roundedUpDays = calcData.roundedUpDays ? calcData.roundedUpDays : defaultDays;
+                }
+
+                // Add item row with actual data
                 tableHTML += `
-                    <tr class="comments-row">
-                        <td colspan="11">
-                            <strong>הבהרות התשומות בטבלה לעיל מהמקורות שלהלן:</strong><br>
-                            1. ד"ר עאוני זריקאת - ההנדסה האזרחית, המגמה לניהול הבנייה. שנה ב' פרק מבוא ללוחות הזמנים 2022.<br>
-                            2. נתון מהמנחה<br>
-                            3. א. אנג'ל, מהנדסים בע"מ, חברת י.ק. תכנון כללי בע"מ (מופיע במקור 1 לעיל).
-                        </td>
+                    <tr class="${item.unitType === 'comp' ? 'comp-row' : ''}">
+                        <td>${item.itemNumber}</td>
+                        <td>${item.descriptionHebrew}</td>
+                        <td>${item.unitType !== 'comp' ? calcData.quantity.toFixed(2) : ''}</td>
+                        <td>${item.unitType === 'm3' ? 'מ"ק' : item.unitType === 'm2' ? 'מ"ר' : item.unitType === 'm' ? 'מ"א' : item.unitType === 'comp' ? 'קומפ\'' : ''}</td>
+                        <td>${item.unitType !== 'comp' ? (calcData.inputOutput || defaultInputOutput).toFixed(2) : ''}</td>
+                        <td>${unitText}</td>
+                        <td>${item.unitType !== 'comp' ? totalHours.toFixed(2) : ''}</td>
+                        <td>${item.unitType !== 'comp' ? calcData.numWorkers : ''}</td>
+                        <td>${item.unitType !== 'comp' ? calcData.hoursPerDay.toFixed(2) : ''}</td>
+                        <td>${totalDays.toFixed(2)}</td>
+                        <td>${roundedUpDays}</td>
                     </tr>
                 `;
+            });
+
+            // Add comments
+            tableHTML += `
+                <tr class="comments-row">
+                    <td colspan="11">
+                        <strong>הבהרות התשומות בטבלה לעיל מהמקורות שלהלן:</strong><br>
+                        1. ד"ר עאוני זריקאת - ההנדסה האזרחית, המגמה לניהול הבנייה. שנה ב' פרק מבוא ללוחות הזמנים 2022.<br>
+                        2. נתון מהמנחה<br>
+                        3. א. אנג'ל, מהנדסים בע"מ, חברת י.ק. תכנון כללי בע"מ (מופיע במקור 1 לעיל).
+                    </td>
+                </tr>
+            `;
 
             tableHTML += `
             </tbody>
@@ -2124,12 +2214,12 @@ projectData.items.forEach(item => {
 
     printWindow.document.write(tableHTML);
     printWindow.document.close();
-                
-                // Wait a short moment before printing to ensure content is loaded
-                setTimeout(() => {
+        
+    // Wait a short moment before printing to ensure content is loaded
+    setTimeout(() => {
         printWindow.print();
-                }, 500);
-    };
+    }, 500);
+};
 }
         // הוספת מאזין לכפתור ההדפסה
         document.addEventListener('DOMContentLoaded', () => {

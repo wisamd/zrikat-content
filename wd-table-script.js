@@ -1070,6 +1070,10 @@ projectData.items.forEach(item => {
                         e.target.value = value.toFixed(2);
                         this.organizationRowData.totalDays = value;
                         updateTotalDays();
+                        this.updateCalculationData('org-row', { 
+                          totalDays: value,
+                          roundedUpDays: value // Set rounded up days to the same value
+                      });
                         this.saveProjectDataToFile(); 
                     }
                 });

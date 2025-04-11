@@ -1082,7 +1082,7 @@ projectData.items.forEach(item => {
                 
                 // Rounded Up column
                 const roundedUpCell = document.createElement('td');
-                roundedUpCell.textContent = '4';
+                roundedUpCell.textContent = '' + this.organizationRowData.totalDays || '4';
                 roundedUpCell.style.textAlign = 'center';
                 roundedUpCell.style.fontWeight = 'bold';
                 orgRow.appendChild(roundedUpCell);

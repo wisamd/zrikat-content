@@ -1643,6 +1643,7 @@ projectData.items.forEach(item => {
                         // Add organization row as first item
                         {
                             itemId: 'org-row',
+                            itemNumber: 0,
                             quantity: this.organizationRowData?.quantity || 0,
                             inputOutput: this.organizationRowData?.inputOutput || 8.00,
                             totalHours: (this.organizationRowData?.quantity || 0) * (this.organizationRowData?.inputOutput || 8.00),
@@ -1654,6 +1655,7 @@ projectData.items.forEach(item => {
                         // Add regular items
                         ...this.projectData.items.map(item => ({
                             itemId: item.id,
+                            itemNumber: item.itemNumber,
                             quantity: this.getCalculationData(item.id).quantity || 0,
                             inputOutput: this.getCalculationData(item.id).inputOutput || 0,
                             totalHours: this.getCalculationData(item.id).totalHours || 0,
@@ -2083,7 +2085,7 @@ projectData.items.forEach(item => {
                 }
 
                 // Add finishing subtitle after 25th row
-                if (rowCount === 27) {
+                if (rowCount === 26) {
                     tableHTML += `
                         <tr class="subtitle-row">
                             <td colspan="1"></td>

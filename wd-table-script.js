@@ -1703,8 +1703,8 @@ projectData.items.forEach(item => {
                         totalHours: 0,
                         numWorkers: 1,
                         hoursPerDay: 8.00,
-                        totalDays: 0,
-                        roundedUpDays: 0
+                        totalDays: 4.00,
+                        roundedUpDays: 4
                     };
                     this.organizationRowData = orgRowData;
                 } else {
@@ -1715,8 +1715,8 @@ projectData.items.forEach(item => {
                         totalHours: 0,
                         numWorkers: 1,
                         hoursPerDay: 8.00,
-                        totalDays: 0,
-                        roundedUpDays: 0
+                        totalDays: 4.00,
+                        roundedUpDays: 4
                     };
                 }
 
@@ -2001,9 +2001,9 @@ projectData.items.forEach(item => {
                     <div class="print-header">
                             <h2>חישוב ימי עבודה - ${new Date().toLocaleDateString('he-IL')}</h2>
                         <div>
-                                <span>מספר פרויקט: ${data.projectData.projectInfo.id}</span> |
-                                <span>שם פרויקט: ${data.projectData.projectInfo.name}</span> |
-                                <span>מספר מבנים: ${data.projectData.projectInfo.numberOfBuildings}</span>
+                            <span>פרויקט: ${v.oBoq.boq_title}</span> |
+                            <span>מספר מבנים: ${v.oBoq.boq_num_of_buildings}</span> |
+                            <span>שם סטודנט: ${v.user.user_metadata.name}</span>
                         </div>
                     </div>
             `);

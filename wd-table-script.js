@@ -1376,7 +1376,7 @@ projectData.items.forEach(item => {
                 totalHoursCell.style.textAlign = 'center';
                 totalHoursCell.style.fontWeight = 'bold';
                 totalHoursCell.style.backgroundColor = item.unitType === "comp" ? 'lightpink' : '#f8f9fa';
-                if (item.unitType === "comp") {
+                if (item.unitType === "comp"  || item.itemNumber === 1 || item.itemNumber === 3) {
                     totalHoursCell.textContent = ""; // Default value for comp items
                 }
                 row.appendChild(totalHoursCell);
@@ -2155,7 +2155,7 @@ projectData.items.forEach(item => {
                     const numWorkers = calcData.numWorkers || 0;
                     const hoursPerDay = calcData.hoursPerDay || 8.00;
                     if(item.itemNumber === 1 || item.itemNumber === 3) {
-                        totalHours = quantity / inputOutput;
+                      totalDays = quantity / inputOutput;
                     }
                     else{
                       totalHours = quantity * inputOutput;

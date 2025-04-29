@@ -342,26 +342,8 @@ const projectData = {
     "quantityPerBuilding": 0
   },
   {
-    "id": "BOQ-010a",
-    "itemNumber": 11,
-    "descriptionHebrew": "רצפת קומת קרקע",
-    "workTypeId": "FRM",
-    "unitType": "m2", 
-    "area": "קומת קרקע",
-    "sections": [
-      {
-        "sectionId": "00.00.0000",
-        "detailedNumber": "00.00.0000",
-        "quantity": 0,
-        "remarks": ""
-      }
-    ],
-    "totalQuantity": 0,
-    "quantityPerBuilding": 0
-  },
-  {
     "id": "BOQ-011",
-    "itemNumber": 12,
+    "itemNumber": 11,
     "descriptionHebrew": "בניית בלוקי חוץ קומת קרקע",
     "workTypeId": "MAS",
     "unitType": "m2",
@@ -379,7 +361,7 @@ const projectData = {
   },
   {
     "id": "BOQ-012",
-    "itemNumber": 13,
+    "itemNumber": 12,
     "descriptionHebrew": "עמודי בטון קומת קרקע",
     "workTypeId": "FRM",
     "unitType": "m3",
@@ -397,7 +379,7 @@ const projectData = {
   },
   {
     "id": "BOQ-013",
-    "itemNumber": 14,
+    "itemNumber": 13,
     "descriptionHebrew": "קירות בטון קומת קרקע",
     "workTypeId": "FRM",
     "unitType": "m3",
@@ -415,7 +397,7 @@ const projectData = {
   },
   {
     "id": "BOQ-014",
-    "itemNumber": 15,
+    "itemNumber": 14,
     "descriptionHebrew": "תקרת קומת קרקע",
     "workTypeId": "FRM",
     "unitType": "m2",
@@ -433,7 +415,7 @@ const projectData = {
   },
   {
     "id": "BOQ-015",
-    "itemNumber": 16,
+    "itemNumber": 15,
     "descriptionHebrew": "בניית בלוקי קירות חוץ קומה א'",
     "workTypeId": "MAS",
     "unitType": "m2",
@@ -451,7 +433,7 @@ const projectData = {
   },
   {
     "id": "BOQ-016",
-    "itemNumber": 17,
+    "itemNumber": 16,
     "descriptionHebrew": "עמודי בטון קומה א'",
     "workTypeId": "FRM",
     "unitType": "m3",
@@ -469,7 +451,7 @@ const projectData = {
   },
   {
     "id": "BOQ-017",
-    "itemNumber": 18,
+    "itemNumber": 17,
     "descriptionHebrew": "קירות בטון קומה א'",
     "workTypeId": "FRM",
     "unitType": "m3",
@@ -487,7 +469,7 @@ const projectData = {
   },
   {
     "id": "BOQ-018",
-    "itemNumber": 19,
+    "itemNumber": 18,
     "descriptionHebrew": "תקרת קומה א'",
     "workTypeId": "FRM",
     "unitType": "m2",
@@ -505,7 +487,7 @@ const projectData = {
   },
   {
     "id": "BOQ-037",
-    "itemNumber": 20,
+    "itemNumber": 19,
     "descriptionHebrew": "בניית בלוקי קירות חוץ קומה ב'",
     "workTypeId": "MAS",
     "unitType": "m2",
@@ -523,7 +505,7 @@ const projectData = {
   },
   {
     "id": "BOQ-038",
-    "itemNumber": 21,
+    "itemNumber": 20,
     "descriptionHebrew": "עמודי בטון קומה ב'",
     "workTypeId": "FRM",
     "unitType": "m3",
@@ -541,7 +523,7 @@ const projectData = {
   },
   {
     "id": "BOQ-039",
-    "itemNumber": 22,
+    "itemNumber": 21,
     "descriptionHebrew": "קירות בטון קומה ב'",
     "workTypeId": "FRM",
     "unitType": "m3",
@@ -559,7 +541,7 @@ const projectData = {
   },
   {
     "id": "BOQ-040",
-    "itemNumber": 23,
+    "itemNumber": 22,
     "descriptionHebrew": "תקרת קומה ב'",
     "workTypeId": "FRM",
     "unitType": "m2",
@@ -577,7 +559,7 @@ const projectData = {
   },
   {
     "id": "BOQ-019",
-    "itemNumber": 24,
+    "itemNumber": 23,
     "descriptionHebrew": "מחיצות לקומת קרקע",
     "workTypeId": "MAS",
     "unitType": "m2",
@@ -595,7 +577,7 @@ const projectData = {
   },
   {
     "id": "BOQ-020",
-    "itemNumber": 25,
+    "itemNumber": 24,
     "descriptionHebrew": "מחיצות קומה א'",
     "workTypeId": "MAS",
     "unitType": "m2",
@@ -613,7 +595,7 @@ const projectData = {
   },
   {
     "id": "BOQ-041",
-    "itemNumber": 26,
+    "itemNumber": 25,
     "descriptionHebrew": "מחיצות קומה ב'",
     "workTypeId": "MAS",
     "unitType": "m2",
@@ -631,7 +613,7 @@ const projectData = {
   },
   {
     "id": "BOQ-021",
-    "itemNumber": 27,
+    "itemNumber": 26,
     "descriptionHebrew": "הכנות קווי אינסטלציה",
     "workTypeId": "PLM",
     "unitType": "comp",
@@ -642,7 +624,7 @@ const projectData = {
   },
   {
     "id": "BOQ-022",
-    "itemNumber": 28,
+    "itemNumber": 27,
     "descriptionHebrew": "הכנת שרוולי חשמל",
     "workTypeId": "ELC",
     "unitType": "comp",
@@ -653,7 +635,7 @@ const projectData = {
   },
   {
     "id": "BOQ-023",
-    "itemNumber": 29,
+    "itemNumber": 28,
     "descriptionHebrew": "טיח פנים לכל הקומות",
     "workTypeId": "IP",
     "unitType": "m2",
@@ -671,7 +653,7 @@ const projectData = {
   },
   {
     "id": "BOQ-024",
-    "itemNumber": 30,
+    "itemNumber": 29,
     "descriptionHebrew": "טיח חוץ לכל המבנה",
     "workTypeId": "EP",
     "unitType": "m2",
@@ -689,7 +671,7 @@ const projectData = {
   },
   {
     "id": "BOQ-025",
-    "itemNumber": 31,
+    "itemNumber": 30,
     "descriptionHebrew": "איטום חללים רטובים",
     "workTypeId": "WTR",
     "unitType": "m2",
@@ -707,7 +689,7 @@ const projectData = {
   },
   {
     "id": "BOQ-026",
-    "itemNumber": 32,
+    "itemNumber": 31,
     "descriptionHebrew": "ריצוף וחיפוי קירות לכל הקומות",
     "workTypeId": "FLR",
     "unitType": "m2",
@@ -725,7 +707,7 @@ const projectData = {
   },
   {
     "id": "BOQ-027",
-    "itemNumber": 33,
+    "itemNumber": 32,
     "descriptionHebrew": "צבע לכל הקומות (פנים)",
     "workTypeId": "PTG",
     "unitType": "m2",
@@ -743,7 +725,7 @@ const projectData = {
   },
   {
     "id": "BOQ-028",
-    "itemNumber": 34,
+    "itemNumber": 33,
     "descriptionHebrew": "עבודות אלומיניום",
     "workTypeId": "WI",
     "unitType": "comp",
@@ -754,7 +736,7 @@ const projectData = {
   },
   {
     "id": "BOQ-029",
-    "itemNumber": 35,
+    "itemNumber": 34,
     "descriptionHebrew": "מתקנים סיניטריים",
     "workTypeId": "",
     "unitType": "comp",
@@ -765,7 +747,7 @@ const projectData = {
   },
   {
     "id": "BOQ-030",
-    "itemNumber": 36,
+    "itemNumber": 35,
     "descriptionHebrew": "מיזוג אוויר",
     "workTypeId": "",
     "unitType": "comp",
@@ -776,7 +758,7 @@ const projectData = {
   },
   {
     "id": "BOQ-031",
-    "itemNumber": 37,
+    "itemNumber": 36,
     "descriptionHebrew": "השלמת עבודות חשמל",
     "workTypeId": "",
     "unitType": "comp",
@@ -787,7 +769,7 @@ const projectData = {
   },
   {
     "id": "BOQ-032",
-    "itemNumber": 38,
+    "itemNumber": 37,
     "descriptionHebrew": "יציקת בטקל על הגג",
     "workTypeId": "CP",
     "unitType": "comp",
@@ -798,7 +780,7 @@ const projectData = {
   },
   {
     "id": "BOQ-033",
-    "itemNumber": 39,
+    "itemNumber": 38,
     "descriptionHebrew": "איטום גג",
     "workTypeId": "RW",
     "unitType": "m2",
@@ -816,7 +798,7 @@ const projectData = {
   },
   {
     "id": "BOQ-034",
-    "itemNumber": 40,
+    "itemNumber": 39,
     "descriptionHebrew": "צבע חוץ לכל המבנה",
     "workTypeId": "PTG",
     "unitType": "m2",
@@ -834,7 +816,7 @@ const projectData = {
   },
   {
     "id": "BOQ-035",
-    "itemNumber": 41,
+    "itemNumber": 40,
     "descriptionHebrew": "פיתוח חוץ כולל השלמת קירות תומכים",
     "workTypeId": "MW",
     "unitType": "comp",
@@ -845,7 +827,7 @@ const projectData = {
   },
   {
     "id": "BOQ-036",
-    "itemNumber": 42,
+    "itemNumber": 41,
     "descriptionHebrew": "תיקונים ומסירה",
     "workTypeId": "",
     "unitType": "comp",

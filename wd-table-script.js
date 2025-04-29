@@ -1402,7 +1402,7 @@ projectData.items.forEach(item => {
                 // Number of Workers column
                 const workersCell = document.createElement('td');
                 let workersInput;
-                if (item.unitType === "comp") {
+                if (item.unitType === "comp" || item.itemNumber === 1 || item.itemNumber === 3) {
                     workersCell.textContent = ""; // Default value for comp items
                 } else {
                     workersInput = document.createElement('input');
@@ -1418,7 +1418,7 @@ projectData.items.forEach(item => {
                 // Hours per Day column
                 const hoursPerDayCell = document.createElement('td');
                 let hoursPerDayInput;
-                if (item.unitType === "comp") {
+                if (item.unitType === "comp" || item.itemNumber === 1 || item.itemNumber === 3) {
                     hoursPerDayCell.textContent = ""; // Default value for comp items
                 } else {
                     hoursPerDayInput = document.createElement('input');
@@ -2172,10 +2172,14 @@ projectData.items.forEach(item => {
                     const inputOutput = calcData.inputOutput || defaultInputOutput;
                     const numWorkers = calcData.numWorkers || 0;
                     const hoursPerDay = calcData.hoursPerDay || 8.00;
-
-                    totalHours = quantity * inputOutput;
-                    if (numWorkers > 0 && hoursPerDay > 0) {
-                        totalDays = totalHours / (numWorkers * hoursPerDay);
+                    if(item.itemNumber === 1 || item.itemNumber === 3) {
+                        totalHours = quantity / inputOutput;
+                    }
+                    else{
+                      totalHours = quantity * inputOutput;
+                      if (numWorkers > 0 && hoursPerDay > 0) {
+                          totalDays = totalHours / (numWorkers * hoursPerDay);
+                      }
                     }
                     roundedUpDays = Math.ceil(totalDays);
                 } else {

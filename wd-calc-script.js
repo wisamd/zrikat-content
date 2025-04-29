@@ -1245,7 +1245,7 @@ projectData.items.forEach((item) => {
                  // מיפוי האזור והכמות מה-BOQ
                  if(item.area === "כל המגרשים" && (boqData.ground_work.ground_work_2m_item_id === boqSection.boq_table_cell_number || 
                     boqData.ground_work.ground_work_1m_item_id === boqSection.boq_table_cell_number) ) {
-                      section.quantity = boqSection.boq_table_cell_count || 0.00;
+                      section.quantity = Number(boqSection.boq_table_cell_count) || 0;
                       section.remarks = boqSection.boq_table_cell_description || '';
                       
                       if (quantityElement) {

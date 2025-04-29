@@ -1474,7 +1474,11 @@ projectData.items.forEach(item => {
                     if (numWorkers > 0 && hoursPerDay > 0) {
                         totalDays = totalHours / (numWorkers * hoursPerDay);
                     }
-                    
+                    if(item.itemNumber === 1 || item.itemNumber === 3) {
+                      const quantity = parseFloat(quantityInput?.value || 0);
+                      const inputOutput = parseFloat(inputOutputInput?.value || 0);
+                      totalDays = quantity/inputOutput; // Default value for comp items
+                    }
                     totalDaysCell.textContent = totalDays.toFixed(2);
                     item.totalDays = totalDays;
 
@@ -1490,8 +1494,12 @@ projectData.items.forEach(item => {
                     const quantity = parseFloat(quantityInput?.value || 0);
                     const inputOutput = parseFloat(inputOutputInput?.value || 0);
                     const totalHours = quantity * inputOutput;
-                    totalHoursCell.textContent = totalHours.toFixed(2);
-                    item.totalHours = totalHours;
+                    if(item.itemNumber === 1|| item.itemNumber === 3) {
+                        totalHoursCell.textContent = ""; // Default value for comp items
+                    } else {
+                      totalHoursCell.textContent = totalHours.toFixed(2);
+                      item.totalHours = totalHours;
+                    }
                     updateTotalDays();
                     this.saveProjectDataToFile();
                 };

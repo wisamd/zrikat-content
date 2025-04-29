@@ -1243,8 +1243,8 @@ projectData.items.forEach((item) => {
                  const remarksElement = row.querySelector(`[data-field="remarks"][data-section-id="${oldSectionId}"]`);
 
                  // מיפוי האזור והכמות מה-BOQ
-                 if(item.area === "כל המגרשים" && (ground_work.ground_work_2m_item_id === boqSection.boq_table_cell_number || 
-                    ground_work.ground_work_1m_item_id === boqSection.boq_table_cell_number) ) {
+                 if(item.area === "כל המגרשים" && (boqData.ground_work.ground_work_2m_item_id === boqSection.boq_table_cell_number || 
+                    boqData.ground_work.ground_work_1m_item_id === boqSection.boq_table_cell_number) ) {
                       section.quantity = boqSection.boq_table_cell_total || 0.00;
                       section.remarks = boqSection.boq_table_cell_description || '';
                       
@@ -1263,7 +1263,7 @@ projectData.items.forEach((item) => {
                       section.sectionId = newSectionId;
                       input.dataset.sectionId = newSectionId;
                  }
-                 
+
                  if (boqSection.boq_item_quantities) {
                      const regionQuantity = boqSection.boq_item_quantities.find(regions => 
                          regions.boq_calc_region === item.area

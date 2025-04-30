@@ -1240,6 +1240,44 @@ projectData.items.forEach(item => {
                 row.className = 'item-row';
                 row.dataset.itemId = item.id;
                 const calcData = this.getCalculationData(item.id);
+                // Set background color for comp items
+                if (item.unitType === "comp") {
+                    row.style.backgroundColor = 'lightpink';
+                }
+                
+                // Number column
+                const numberCell = document.createElement('td');
+                numberCell.textContent = item.itemNumber;
+                row.appendChild(numberCell);
+
+                // Work Type column
+                const workTypeCell = document.createElement('td');
+                workTypeCell.textContent = item.descriptionHebrew;
+                row.appendChild(workTypeCell);
+
+                // Quantity column
+                const quantityCell = document.createElement('td');
+                let quantityInput;
+                if (item.unitType === "comp") {
+                    quantityCell.textContent = ""; // Default value for comp items
+                } else {
+                    quantityInput = document.createElement('input');
+                    quantityInput.type = 'number';
+                    quantityInput.step = '0.01';
+                    
+                    quantityInput.value = (calcData?.quantity || 0).toFixed(2);
+                    quantityInput.style.width = '100px';
+                    quantityInput.style.textAlign = 'center';
+                    quantityCell.appendChild(quantityInput);
+                }
+                row.appendChild(quantityCell);
+
+                // Units column
+                const unitCell = document.createElement('td');
+                const unit = this.referenceData.units[item.unitType];
+                unitCell.textContent = unit ? unit.symbol : '';
+                row.appendChild(unitCell);
+
                 let val = idToValueMap[item.id] || 0; // Default to 0 if item.id is not in the object
                 const inputOutputCell = document.createElement('td');
                 if (item.unitType === "comp") {

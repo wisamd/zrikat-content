@@ -1242,70 +1242,70 @@ projectData.items.forEach((item) => {
                  const quantityElement = row.querySelector(`[data-field="quantity"][data-section-id="${oldSectionId}"]`);
                  const remarksElement = row.querySelector(`[data-field="remarks"][data-section-id="${oldSectionId}"]`);
 
-                 // מיפוי האזור והכמות מה-BOQ
-                 if(item.area === "כל המגרשים" && (boqData.ground_work.ground_work_2m_item_id === boqSection.boq_table_cell_number || 
-                    boqData.ground_work.ground_work_1m_item_id === boqSection.boq_table_cell_number) ) {
-                      section.quantity = Number(boqSection.boq_table_cell_count) || 0;
-                      section.remarks = boqSection.boq_table_cell_description || '';
-                      
-                      if (quantityElement) {
-                          quantityElement.textContent = section.quantity.toFixed(2);
-                          quantityElement.dataset.sectionId = newSectionId;
-                      }
-                      
-                      if (remarksElement) {
-                          remarksElement.textContent = section.remarks || '';
-                          remarksElement.dataset.sectionId = newSectionId;
-                      }
+                 // Check if boqData.ground_work exists before accessing its properties
+                 if (boqData.ground_work && item.area === "כל המגרשים" && 
+                     (boqData.ground_work.ground_work_2m_item_id === boqSection.boq_table_cell_number || 
+                      boqData.ground_work.ground_work_1m_item_id === boqSection.boq_table_cell_number)) {
+                     
+                     section.quantity = Number(boqSection.boq_table_cell_count) || 0;
+                     section.remarks = boqSection.boq_table_cell_description || '';
 
-                      // עדכון הדאטה
-                      section.detailedNumber = newSectionId;
-                      section.sectionId = newSectionId;
-                      input.dataset.sectionId = newSectionId;
-                 }else{
-                  if (boqSection.boq_item_quantities) {
-                      const regionQuantity = boqSection.boq_item_quantities.find(regions => 
-                          regions.boq_calc_region === item.area
-                      );
+                     if (quantityElement) {
+                         quantityElement.textContent = section.quantity.toFixed(2);
+                         quantityElement.dataset.sectionId = newSectionId;
+                     }
 
-                      if (regionQuantity) {
-                          let res = 0;
-                          regionQuantity.boq_calc_quantities.forEach((quan) => {
-                              res += Number(quan.boq_calc_total);
-                            });
-                          section.quantity = Number(res.toFixed(2));
-                          section.remarks = boqSection.boq_table_cell_description || '';
-                          
-                          if (quantityElement) {
-                              quantityElement.textContent = section.quantity.toFixed(2);
-                              quantityElement.dataset.sectionId = newSectionId;
-                          }
-                          
-                          if (remarksElement) {
-                              remarksElement.textContent = section.remarks || '';
-                              remarksElement.dataset.sectionId = newSectionId;
-                          }
+                     if (remarksElement) {
+                         remarksElement.textContent = section.remarks || '';
+                         remarksElement.dataset.sectionId = newSectionId;
+                     }
 
-                          // עדכון הדאטה
-                          section.detailedNumber = newSectionId;
-                          section.sectionId = newSectionId;
-                          input.dataset.sectionId = newSectionId;
+                     // Update data
+                     section.detailedNumber = newSectionId;
+                     section.sectionId = newSectionId;
+                     input.dataset.sectionId = newSectionId;
+                 } else if (boqSection.boq_item_quantities) {
+                     const regionQuantity = boqSection.boq_item_quantities.find(regions => 
+                         regions.boq_calc_region === item.area
+                     );
 
-                      }else{
-                          const popup = document.createElement('div');
-                          popup.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 1000; text-align: center; direction: rtl;';
-                          popup.innerHTML = `
-                              <p>הסעיף החדש לא מכיל את האזור ${item.area}</p>
-                              <button onclick="this.parentElement.remove()" style="margin-top: 10px; padding: 5px 10px;">אישור</button>
-                          `;
-                          document.body.appendChild(popup);
-                          section.detailedNumber = oldSectionId;
-                          section.sectionId = oldSectionId;
-                          input.value = oldSectionId;
-                          return;
-                      }
-                    }
-                  }
+                     if (regionQuantity) {
+                         let res = 0;
+                         regionQuantity.boq_calc_quantities.forEach((quan) => {
+                             res += Number(quan.boq_calc_total);
+                           });
+                         section.quantity = Number(res.toFixed(2));
+                         section.remarks = boqSection.boq_table_cell_description || '';
+
+                         if (quantityElement) {
+                             quantityElement.textContent = section.quantity.toFixed(2);
+                             quantityElement.dataset.sectionId = newSectionId;
+                         }
+
+                         if (remarksElement) {
+                             remarksElement.textContent = section.remarks || '';
+                             remarksElement.dataset.sectionId = newSectionId;
+                         }
+
+                         // Update data
+                         section.detailedNumber = newSectionId;
+                         section.sectionId = newSectionId;
+                         input.dataset.sectionId = newSectionId;
+
+                     } else {
+                         const popup = document.createElement('div');
+                         popup.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 1000; text-align: center; direction: rtl;';
+                         popup.innerHTML = `
+                             <p>הסעיף החדש לא מכיל את האזור ${item.area}</p>
+                             <button onclick="this.parentElement.remove()" style="margin-top: 10px; padding: 5px 10px;">אישור</button>
+                         `;
+                         document.body.appendChild(popup);
+                         section.detailedNumber = oldSectionId;
+                         section.sectionId = oldSectionId;
+                         input.value = oldSectionId;
+                         return;
+                     }
+                 }
              };
 
              // ביצוע העדכון באופן מיידי

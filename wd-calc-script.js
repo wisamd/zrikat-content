@@ -1577,7 +1577,7 @@ projectData.items.forEach((item) => {
                      // רענון הטבלה ועדכון החישובים
                      boqApp.tableGenerator.pwdRefreshTable();
                      boqApp.calculations.pwdUpdateAllCalculations();
-                     saveProjectDataToFile();
+                     saveChanges();
                  }
              } else {
                  console.log('לא נמצאו נתונים ב-localStorage');

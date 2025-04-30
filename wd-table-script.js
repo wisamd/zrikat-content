@@ -1068,6 +1068,7 @@ projectData.items.forEach(item => {
                 roundedUpCell.style.textAlign = 'center';
                 roundedUpCell.style.fontWeight = 'bold';
                 orgRow.appendChild(roundedUpCell);
+                orgRow.style.backgroundColor = 'lightpink';
                 
                 // Add main subtitle cell 
                 const excavationSubtitleRow = document.createElement('tr');

@@ -1280,10 +1280,10 @@ projectData.items.forEach(item => {
 
                 let val = idToValueMap[item.id] || 0; // Default to 0 if item.id is not in the object
                 const inputOutputCell = document.createElement('td');
+                let inputOutputInput;
                 if (item.unitType === "comp") {
                     inputOutputCell.textContent = ""; // Default value for comp items
                 }else{
-                let inputOutputInput;
                 inputOutputInput = document.createElement('input');
                 inputOutputInput.type = 'number';
                 inputOutputInput.step = '0.01';

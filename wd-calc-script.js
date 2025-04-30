@@ -1551,7 +1551,7 @@ projectData.items.forEach((item) => {
 
      document.addEventListener('DOMContentLoaded', () => {
          window.boqApp = new BOQApp();
-         loadFileAutomatically(); // קריאה לפונקציה לטעינת קובץ אוטומטית
+         loadFileAutomatically(); // Load and save data only when ready
      });
 
      function loadFileAutomatically() {
@@ -1577,15 +1577,26 @@ projectData.items.forEach((item) => {
                      // רענון הטבלה ועדכון החישובים
                      boqApp.tableGenerator.pwdRefreshTable();
                      boqApp.calculations.pwdUpdateAllCalculations();
-                     saveChanges();
                  }
              } else {
                  console.log('לא נמצאו נתונים ב-localStorage');
+                 saveInitialProjectData(); // Save initial data if not found
              }
          } catch (error) {
              console.error('שגיאה בטעינת הנתונים:', error);
          }
      }
+
+     // Function to save initial projectData to localStorage
+     function saveInitialProjectData() {
+         const initialData = {
+             projectData: projectData,
+             lastSaved: new Date().toISOString()
+         };
+         localStorage.setItem('projectData', JSON.stringify(initialData));
+         console.log('Initial projectData saved to localStorage.');
+     }
+
      function checkScreenSize() {
          const message = document.getElementById('small-screen-message');
          if (window.innerWidth < 768) {
@@ -1792,3 +1803,15 @@ projectData.items.forEach((item) => {
              printBtn.addEventListener('click', printTable);
          }
      });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Save initial projectData to localStorage if not already saved
+    if (!localStorage.getItem('projectData')) {
+        const initialData = {
+            projectData: projectData,
+            lastSaved: new Date().toISOString()
+        };
+        localStorage.setItem('projectData', JSON.stringify(initialData));
+        console.log('Initial projectData saved to localStorage.');
+    }
+});

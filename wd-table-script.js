@@ -850,6 +850,50 @@ projectData.items.forEach(item => {
          * מחלקה ליצירת וניהול טבלת כתב הכמויות
          * אחראית על תצוגת הטבלה, הוספת שורות, עריכת כמויות והערות
          */
+        const idToValueMap = {
+            "BOQ-001": 450.00,
+            "BOQ-002": 17.00,
+            "BOQ-003": 60.00,
+            "BOQ-004": 15.00,
+            "BOQ-005": 0.25,
+            "BOQ-006": 31.00,
+            "BOQ-007": 1.50,
+            "BOQ-008": 17.00,
+            "BOQ-009": 1.34,
+            "BOQ-010": 0.50,
+            "BOQ-011": 1.60,
+            "BOQ-012": 31.00,
+            "BOQ-013": 17.00,
+            "BOQ-014": 1.34,
+            "BOQ-015": 1.60,
+            "BOQ-016": 31.00,
+            "BOQ-017": 17.00,
+            "BOQ-018": 1.34,
+            "BOQ-037": 1.60,
+            "BOQ-038": 31.00,
+            "BOQ-039": 17.00,
+            "BOQ-040": 1.34,
+            "BOQ-019": 1.30,
+            "BOQ-020": 1.30,
+            "BOQ-041": 1.30,
+            "BOQ-021": 1,
+            "BOQ-022": 1,
+            "BOQ-023": 0.55,
+            "BOQ-024": 0.70,
+            "BOQ-025": 0.50,
+            "BOQ-026": 0.88,
+            "BOQ-027": 0.10,
+            "BOQ-028": 1,
+            "BOQ-029": 1,
+            "BOQ-030": 1,
+            "BOQ-031": 1,
+            "BOQ-032": 1,
+            "BOQ-033": 0.50,
+            "BOQ-034": 0.12,
+            "BOQ-035": 1,
+            "BOQ-036": 1
+        };
+
         class BOQTableGenerator {
             constructor(containerId, projectData, referenceData) {
                 this.container = document.getElementById(containerId);
@@ -1138,7 +1182,7 @@ projectData.items.forEach(item => {
                     }
 
                     // Add finishing subtitle after row 26
-                    if (rowCount === 26) {
+                    if (rowCount === 25) {
                         const finishingSubtitleRow = document.createElement('tr');
                         
                         // Add number cell first
@@ -1190,166 +1234,21 @@ projectData.items.forEach(item => {
                 };
                 
                 return tbody;
-              }
+            }
             pwdCreateItemRow(item) {
                 const row = document.createElement('tr');
                 row.className = 'item-row';
                 row.dataset.itemId = item.id;
                 const calcData = this.getCalculationData(item.id);
-                // Set background color for comp items
-                if (item.unitType === "comp") {
-                    row.style.backgroundColor = 'lightpink';
-                }
-                
-                // Number column
-                const numberCell = document.createElement('td');
-                numberCell.textContent = item.itemNumber;
-                row.appendChild(numberCell);
-
-                // Work Type column
-                const workTypeCell = document.createElement('td');
-                workTypeCell.textContent = item.descriptionHebrew;
-                row.appendChild(workTypeCell);
-
-                // Quantity column
-                const quantityCell = document.createElement('td');
-                let quantityInput;
-                if (item.unitType === "comp") {
-                    quantityCell.textContent = ""; // Default value for comp items
-                } else {
-                    quantityInput = document.createElement('input');
-                    quantityInput.type = 'number';
-                    quantityInput.step = '0.01';
+                let val = idToValueMap[item.id] || 0; // Default to 0 if item.id is not in the object
                     
-                    quantityInput.value = (calcData?.quantity || 0).toFixed(2);
-                    quantityInput.style.width = '100px';
-                    quantityInput.style.textAlign = 'center';
-                    quantityCell.appendChild(quantityInput);
-                }
-                row.appendChild(quantityCell);
-
-                // Units column
-                const unitCell = document.createElement('td');
-                const unit = this.referenceData.units[item.unitType];
-                unitCell.textContent = unit ? unit.symbol : '';
-                row.appendChild(unitCell);
-
-                // Input/Output column
-                const inputOutputCell = document.createElement('td');
-                let inputOutputInput;
-                if (item.unitType === "comp") {
-                    inputOutputCell.textContent = ""; // Default value for comp items
-                } else {
-                  let val = 0;
-                  switch (item.itemNumber) {
-                        case 1:
-                          val = 450.00;
-                          break;
-                        case 2:
-                          val = 17.00;
-                          break;
-                        case 3:
-                          val = 60.00;
-                          break;
-                        case 4:
-                          val = 15.00;
-                          break;
-                        case 5:
-                          val = 0.25;
-                          break;
-                        case 6: 
-                          val = 31.00;
-                          break;
-                        case 7:
-                          val = 1.50;
-                          break;
-                        case 8:
-                          val = 17.00;
-                          break;
-                        case 9:
-                          val = 1.34;
-                          break;
-                        case 10:
-                          val = 0.50;
-                          break;
-                        case 11:
-                          val = 1.60;
-                          break;
-                        case 12:
-                          val = 31.00;
-                          break;
-                        case 13:
-                          val = 170.00;
-                          break;
-                        case 14:
-                          val = 1.34;
-                          break;
-                        case 15:
-                          val = 1.60;
-                          break;
-                        case 16:
-                          val = 31.00;
-                          break;
-                        case 17:
-                          val = 17.00;
-                          break;
-                        case 18:
-                          val = 17.00;
-                          break;
-                        case 19:
-                          val = 1.34;
-                          break;  
-                        case 20:
-                          val = 31.00;
-                          break;
-                        case 21:
-                          val = 17.00;
-                          break;
-                        case 22:
-                          val = 17.00;
-                          break;
-                        case 23:
-                          val = 1.34;
-                          break;
-                        case 24:
-                          val = 1.30;
-                          break;
-                        case 25:
-                          val = 1.30;
-                          break;
-                        case 26:
-                          val = 1.30;
-                          break;
-                        case 29:
-                          val = 0.55;
-                          break;
-                        case 30:
-                          val = 0.70;
-                          break;
-                        case 31:
-                          val = 0.50;
-                          break;
-                        case 32:
-                          val = 0.88;
-                          break;
-                        case 33:
-                          val = 0.10;
-                          break;
-                        case 39:
-                          val = 0.50;
-                          break;
-                        case 40:
-                          val = 0.12;
-                          break;
-                      }
-                    inputOutputInput = document.createElement('input');
-                    inputOutputInput.type = 'number';
-                    inputOutputInput.step = '0.01';
-                    inputOutputInput.value = (calcData?.inputOutput || val).toFixed(2);
-                    inputOutputInput.style.width = '100px';
-                    inputOutputInput.style.textAlign = 'center';
-                    inputOutputCell.appendChild(inputOutputInput);
-                }
+                inputOutputInput = document.createElement('input');
+                inputOutputInput.type = 'number';
+                inputOutputInput.step = '0.01';
+                inputOutputInput.value = (calcData?.inputOutput || val).toFixed(2);
+                inputOutputInput.style.width = '100px';
+                inputOutputInput.style.textAlign = 'center';
+                inputOutputCell.appendChild(inputOutputInput);
                 row.appendChild(inputOutputCell);
 
                 // Units column (second)
@@ -2080,7 +1979,7 @@ projectData.items.forEach(item => {
                 }
 
                 // Add finishing subtitle after 25th row
-                if (rowCount === 26) {
+                if (rowCount === 25) {
                     tableHTML += `
                         <tr class="subtitle-row">
                             <td colspan="1"></td>
@@ -2100,42 +1999,8 @@ projectData.items.forEach(item => {
                 }
 
                 // Get default input/output value based on item number
-                let defaultInputOutput = 0;
-                switch (item.itemNumber) {
-                    case 1: defaultInputOutput = 450.00; break;
-                    case 2: defaultInputOutput = 17.00; break;
-                    case 3: defaultInputOutput = 60.00; break;
-                    case 4: defaultInputOutput = 15.00; break;
-                    case 5: defaultInputOutput = 0.25; break;
-                    case 6: defaultInputOutput = 31.00; break;
-                    case 7: defaultInputOutput = 1.50; break;
-                    case 8: defaultInputOutput = 17.00; break;
-                    case 9: defaultInputOutput = 1.34; break;
-                    case 10: defaultInputOutput = 0.50; break;
-                    case 11: defaultInputOutput = 1.60; break;
-                    case 12: defaultInputOutput = 31.00; break;
-                    case 13: defaultInputOutput = 170.00; break;
-                    case 14: defaultInputOutput = 1.34; break;
-                    case 15: defaultInputOutput = 1.60; break;
-                    case 16: defaultInputOutput = 31.00; break;
-                    case 17: defaultInputOutput = 17.00; break;
-                    case 18: defaultInputOutput = 17.00; break;
-                    case 19: defaultInputOutput = 1.34; break;
-                    case 20: defaultInputOutput = 31.00; break;
-                    case 21: defaultInputOutput = 17.00; break;
-                    case 22: defaultInputOutput = 17.00; break;
-                    case 23: defaultInputOutput = 1.34; break;
-                    case 24: defaultInputOutput = 1.30; break;
-                    case 25: defaultInputOutput = 1.30; break;
-                    case 26: defaultInputOutput = 1.30; break;
-                    case 29: defaultInputOutput = 0.55; break;
-                    case 30: defaultInputOutput = 0.70; break;
-                    case 31: defaultInputOutput = 0.50; break;
-                    case 32: defaultInputOutput = 0.88; break;
-                    case 33: defaultInputOutput = 0.10; break;
-                    case 39: defaultInputOutput = 0.50; break;
-                    case 40: defaultInputOutput = 0.12; break;
-                }
+                let defaultInputOutput = idToValueMap[item.id] || 0;
+                
 
                 // Get unit text based on item number
                 let unitText = '';
